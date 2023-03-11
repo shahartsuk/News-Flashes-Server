@@ -15,12 +15,14 @@ namespace News.Entities
         public RequestGet requestGet { get; set; }
         public RequestPost requestPost { get; set; }
         public ConfigDB configDB { get; set; }
+        public DataLayer dataLayer { get; set; }
 
         public void Init()
         {
             requestGet = new RequestGet();
             requestPost = new RequestPost();
             configDB = new ConfigDB();
+            dataLayer = DataLayer.Data;
         }
     }
 }

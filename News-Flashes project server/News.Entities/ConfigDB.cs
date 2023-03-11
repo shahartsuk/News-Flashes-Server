@@ -10,7 +10,7 @@ namespace News.Entities
 {
     public class ConfigDB
     {
-        public string GetConfigConnectionString()
+        public static string GetConfigConnectionString()
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
 
