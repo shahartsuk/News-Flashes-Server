@@ -1,4 +1,5 @@
-﻿using System;
+﻿using News.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,15 +15,15 @@ namespace News.Entities
         public static MainManager Instance { get { return _Instance; } }
         public RequestGet requestGet { get; set; }
         public RequestPost requestPost { get; set; }
-        public ConfigDB configDB { get; set; }
         public DataLayer dataLayer { get; set; }
+        public Logger logger { get; set; }
 
         public void Init()
         {
             requestGet = new RequestGet();
             requestPost = new RequestPost();
-            configDB = new ConfigDB();
             dataLayer = DataLayer.Data;
+            logger = new Logger("File");
         }
     }
 }

@@ -133,8 +133,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigDB.cs" />
-    <Compile Include="DataLayer.cs" />
     <Compile Include="MainManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestGet.cs" />
@@ -152,6 +150,10 @@
     <ProjectReference Include="..\News.DataSql\News.DataSql.csproj">
       <Project>{3f6f851d-0377-4575-8115-6ac51c4c585b}</Project>
       <Name>News.DataSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\News.Logger\News.Utilities.csproj">
+      <Project>{634fa69c-9a7e-4839-8aad-5a301a9384a5}</Project>
+      <Name>News.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\News.Model\News.Model.csproj">
       <Project>{4734a57d-9e5f-491c-921c-69b4546ca114}</Project>

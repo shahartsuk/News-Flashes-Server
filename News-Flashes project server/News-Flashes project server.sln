@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Dal", "News.Dal\News.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.DataSql", "News.DataSql\News.DataSql.csproj", "{3F6F851D-0377-4575-8115-6AC51C4C585B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Server", "News.Server\News.Server.csproj", "{BB0022B0-2B81-4E36-89BD-556FC308B1C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "News.Server", "News.Server\News.Server.csproj", "{BB0022B0-2B81-4E36-89BD-556FC308B1C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Test", "News.Test\News.Test.csproj", "{E513E558-3652-4746-8A81-8BC3F47936D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Utilities", "News.Logger\News.Utilities.csproj", "{634FA69C-9A7E-4839-8AAD-5A301A9384A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E513E558-3652-4746-8A81-8BC3F47936D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E513E558-3652-4746-8A81-8BC3F47936D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E513E558-3652-4746-8A81-8BC3F47936D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634FA69C-9A7E-4839-8AAD-5A301A9384A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634FA69C-9A7E-4839-8AAD-5A301A9384A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634FA69C-9A7E-4839-8AAD-5A301A9384A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634FA69C-9A7E-4839-8AAD-5A301A9384A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
