@@ -14,7 +14,11 @@ namespace News.Entities
         //public static string connectionString = MainManager.Instance.configDB.GetConfigConnectionString();
         //"Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=News-Flashes-Project;Data Source=SHAHAR\\SQLEXPRESS01";
         //MainManager.Instance.configDB.GetConfigConnectionString();
-        private DataLayer() : base("Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=News-Flashes-Project;Data Source=SHAHAR\\SQLEXPRESS01")
+<<<<<<< Updated upstream
+        private DataLayer() : base(connectionString)
+=======
+        private DataLayer() : base("Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=News-Flashes-Project;Data Source=localhost\\SQLEXPRESS")
+>>>>>>> Stashed changes
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataLayer>());
             //if the first default model list is null use seed and start the DB
@@ -44,15 +48,15 @@ namespace News.Entities
 
             SaveChanges();
         }
-
-        //DBset lists of models to DB
-        public DbSet<Article> Articles { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
-
         public void AddSubject(string Name)
         {
             Subject subject = new Subject { Name = Name };
             Subjects.Add(subject);
         }
+
+        //DBset lists of models to DB
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+
     }
 }
