@@ -11,14 +11,22 @@ namespace News.Entities
     public class DataLayer : DbContext
     {
         private static DataLayer _Data;
-        //public static string connectionString = MainManager.Instance.configDB.GetConfigConnectionString();
+        public static string connectionString = ConfigDB.GetConfigConnectionString();
         //"Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=News-Flashes-Project;Data Source=SHAHAR\\SQLEXPRESS01";
         //MainManager.Instance.configDB.GetConfigConnectionString();
-        private DataLayer() : base("Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=News-Flashes-Project;Data Source=localhost\\SQLEXPRESS")
+        private DataLayer() : base(connectionString)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataLayer>());
-            //if the first default model list is null use seed and start the DB
-            if (Subjects.Count() == 0) Seed();
+            try
+            {
+                Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataLayer>());
+                //if the first default model list is null use seed and start the DB
+                if (Subjects.Count() == 0) Seed();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public static DataLayer Data { get { if (_Data == null) { _Data = new DataLayer(); } return _Data; } }
 
