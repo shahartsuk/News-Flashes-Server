@@ -41,10 +41,6 @@ app.UseAuthorization();
 //app.UseCors();
 
 app.Run();
-<<<<<<< Updated upstream
-=======
-
-
 
 //using Microsoft.AspNetCore.Cors.Infrastructure;
 
@@ -83,4 +79,3 @@ app.Run();
 
 //app.Run();
 
->>>>>>> Stashed changes
