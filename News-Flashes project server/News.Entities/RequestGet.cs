@@ -32,9 +32,11 @@ namespace News.Entities
                     //string title = node.SelectNodes("title")[0].InnerText;
                     MainManager.Instance.Walla.Title = node["title"].InnerText;
                     MainManager.Instance.Walla.WebLink = node["link"].InnerText;
-                    MainManager.Instance.Walla.Description = node["description"].InnerText;
-                    MainManager.Instance.Walla.LinkImage= node["enclosure"].InnerText;
-                   
+                    string description = node["description"].InnerText;
+                    string[] separator = { "src=", "<br/>", "</p>", " /></a>" };
+					string[] strArr = description.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+					MainManager.Instance.Walla.Description = strArr[2];
+                    MainManager.Instance.Walla.LinkImage = strArr[1];
                 }
 
                 // Output the content of the response 
