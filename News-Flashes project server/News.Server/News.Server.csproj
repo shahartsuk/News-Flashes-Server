@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\News.Entities\News.Entities.csproj" />
-    <ProjectReference Include="..\News.Model\News.Model.csproj" />
   </ItemGroup>
 
 </Project>
