@@ -33,7 +33,7 @@ namespace News.Entities
                     MainManager.Instance.Walla.Title = node["title"].InnerText;
                     MainManager.Instance.Walla.WebLink = node["link"].InnerText;
                     MainManager.Instance.Walla.Description = node["description"].InnerText;
-                    MainManager.Instance.Walla.LinkImage= node["enclosure/url"].InnerText;
+                    MainManager.Instance.Walla.LinkImage= node["enclosure"].InnerText;
                    
                 }
 
