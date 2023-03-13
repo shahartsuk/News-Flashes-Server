@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataLayerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +67,10 @@
     <ProjectReference Include="..\News.Entities\News.Entities.csproj">
       <Project>{e4bf8b73-a26b-4642-a836-125d801ae177}</Project>
       <Name>News.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\News.Model\News.Model.csproj">
+      <Project>{4734A57D-9E5F-491C-921C-69B4546CA114}</Project>
+      <Name>News.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

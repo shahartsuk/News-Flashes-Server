@@ -34,6 +34,18 @@ namespace News.Entities
         private void Seed()
         {
             //default subjects
+            InitSubjects();
+
+            SaveChanges();
+        }
+        public void AddSubject(string Name)
+        {
+            Subject subject = new Subject { Name = Name };
+            Subjects.Add(subject);
+        }
+         
+        public void InitSubjects()
+        {
             AddSubject("מבזקי חדשות");
             AddSubject("רכב");
             AddSubject("תיירות");
@@ -49,13 +61,6 @@ namespace News.Entities
             AddSubject("בריאות");
             AddSubject("נדלן");
             AddSubject("אוכל");
-
-            SaveChanges();
-        }
-        public void AddSubject(string Name)
-        {
-            Subject subject = new Subject { Name = Name };
-            Subjects.Add(subject);
         }
 
         //DBset lists of models to DB

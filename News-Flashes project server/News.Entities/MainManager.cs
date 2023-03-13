@@ -1,4 +1,5 @@
-﻿using News.Utilities;
+﻿using News.Model;
+using News.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace News.Entities
         public RequestPost requestPost { get; set; }
         public DataLayer dataLayer { get; set; }
         public Logger logger { get; set; }
+        public WallaRSS Walla { get; set; }
 
         public void Init()
         {
@@ -24,6 +26,7 @@ namespace News.Entities
             requestPost = new RequestPost();
             dataLayer = DataLayer.Data;
             logger = new Logger("File");
+            Walla = new WallaRSS();
         }
     }
 }
