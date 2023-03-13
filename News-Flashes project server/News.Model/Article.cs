@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace News.Model
 {
-    public class Article
+    public abstract class Article
     {
         [Key]
         public int Id { get; set; }

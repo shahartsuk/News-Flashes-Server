@@ -9,22 +9,18 @@ namespace News.Model
 {
     public class User
     {
-        //private User() { Subjects = new List<Subject>(); }
+        public User() { Subjects = new List<UserSubjects>(); }
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
 
         [Required,Display(Name = "Email")] 
         public string Email { get; set; }
 
         //private List<UserSubjects> _Subjects { set; }
-        //public List<UserSubjects> Subjects
-        //{
-        //    get { }
-        //    set
-        //    {
-
-        //    }
-        //}
+        public List<UserSubjects> Subjects { get; set; }
+        
 
     }
 }

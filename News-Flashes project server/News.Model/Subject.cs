@@ -13,8 +13,11 @@ namespace News.Model
         [Key]
         public int Id { get; set; }
         [Required,Display(Name = "Name")]
-        public string Name { get; set; }
-        
+        public string Name { get; set; }     
         public List<RssSubjectsUrl> RssSubjects { get; set; }
+        public void AddRssSubjectUrl(RssSubjectsUrl rssSubject) 
+        { 
+            RssSubjects.Add(rssSubject); 
+        }
     }
 }

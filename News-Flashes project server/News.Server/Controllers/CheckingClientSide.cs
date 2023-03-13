@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using News.Entities;
+using News.Model;
 
 namespace News.Server.Controllers
 {
@@ -11,7 +12,8 @@ namespace News.Server.Controllers
         [HttpGet("GetSubjects")]
         public JsonResult GetAllSubjectsList()
         {
-            return new JsonResult(MainManager.Instance.dataLayer.Subjects.ToList());
+            List<Subject> subjects = MainManager.Instance.dataLayer.Subjects.ToList();
+            return new JsonResult(subjects);
         }
     }
 }
