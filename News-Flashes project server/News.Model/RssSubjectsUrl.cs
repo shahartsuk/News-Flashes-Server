@@ -11,9 +11,7 @@ namespace News.Model
     {
         [Key]
         public int Id { get; set; }
-        [Required,Display(Name = "Link")]
+        [Required, Display(Name = "RssUrlLink")]
         public string Link { get; set; }
-        //[Required,Display(Name = "Subject")]
-        //public Subject subject { get; set; }
     }
 }
