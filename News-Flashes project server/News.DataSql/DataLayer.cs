@@ -12,8 +12,7 @@ namespace News.Entities
     {
         private static DataLayer _Data;
         public static string connectionString = ConfigDB.GetConfigConnectionString();
-        //"Integrated Security=SSPI;Persist Security Info=True;Initial Catalog=News-Flashes-Project;Data Source=SHAHAR\\SQLEXPRESS01";
-        //MainManager.Instance.configDB.GetConfigConnectionString();
+       
         private DataLayer() : base(connectionString)
         {
             try
