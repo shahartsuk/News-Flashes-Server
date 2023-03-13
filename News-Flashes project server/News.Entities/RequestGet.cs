@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -15,7 +16,7 @@ namespace News.Entities
             using (var client = new HttpClient())
             {
                 // Make a GET request to the URL 
-                var response = await client.GetAsync("https://www.walla.co.il/rss ");
+                var response = await client.GetAsync("https://rss.walla.co.il/feed/22");
 
                 // Ensure the response was successful 
                 response.EnsureSuccessStatusCode();
@@ -29,10 +30,11 @@ namespace News.Entities
                 foreach (XmlNode node in xmlDoc.SelectNodes("//item"))
                 {
                     //string title = node.SelectNodes("title")[0].InnerText;
-                    string title = node["title"].InnerText;
-                    string link = node["link"].InnerText;
-                    string description = node["description"].InnerText;
-                    string url = node["url"].InnerText;
+                    MainManager.Instance.Walla.Title = node["title"].InnerText;
+                    MainManager.Instance.Walla.WebLink = node["link"].InnerText;
+                    MainManager.Instance.Walla.Description = node["description"].InnerText;
+                    MainManager.Instance.Walla.LinkImage= node["enclosure/url"].InnerText;
+                   
                 }
 
                 // Output the content of the response 

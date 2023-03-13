@@ -9,7 +9,7 @@ namespace News.Server.Controllers
     public class CheckingClientSide
     {
         [HttpGet("GetSubjects")]
-        public JsonResult GetAllCitiesList()
+        public JsonResult GetAllSubjectsList()
         {
             return new JsonResult(MainManager.Instance.dataLayer.Subjects.ToList());
         }
