@@ -45,7 +45,10 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RssSubjectsUrl.cs" />
     <Compile Include="Subject.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserSubjects.cs" />
     <Compile Include="WallaRSS.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -61,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\News.DataSql\News.DataSql.csproj">
+      <Project>{3f6f851d-0377-4575-8115-6ac51c4c585b}</Project>
+      <Name>News.DataSql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\News.Entities\News.Entities.csproj">
       <Project>{e4bf8b73-a26b-4642-a836-125d801ae177}</Project>
       <Name>News.Entities</Name>

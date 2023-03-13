@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\News.DataSql\News.DataSql.csproj" />
     <ProjectReference Include="..\News.Entities\News.Entities.csproj" />
     <ProjectReference Include="..\News.Model\News.Model.csproj" />
   </ItemGroup>

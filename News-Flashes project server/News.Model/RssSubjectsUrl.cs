@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace News.Model
 {
-    public class Subject
+    public class RssSubjectsUrl
     {
-        public Subject() { RssSubjects = new List<RssSubjectsUrl>(); }
         [Key]
         public int Id { get; set; }
-        [Required,Display(Name = "Name")]
-        public string Name { get; set; }
-        
-        public List<RssSubjectsUrl> RssSubjects { get; set; }
+        [Required,Display(Name = "Link")]
+        public string Link { get; set; }
+        //[Required,Display(Name = "Subject")]
+        //public Subject subject { get; set; }
     }
 }
