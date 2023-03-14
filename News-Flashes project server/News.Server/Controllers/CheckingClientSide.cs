@@ -12,7 +12,7 @@ namespace News.Server.Controllers
         [HttpGet("GetSubjects")]
         public JsonResult GetAllSubjectsList()
         {
-            List<Subject> subjects = MainManager.Instance.dataLayer.Subjects.ToList();
+            List<Subject> subjects = DataLayer.Data.Subjects.ToList();
             return new JsonResult(subjects);
         }
     }
