@@ -11,13 +11,12 @@ namespace News.Model
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "LinkImage")]
+        [Required, Display(Name = "Title")]
         public string Title { get; set; }
-
-        [Required, Display(Name = "Description")]
+        [Required,Display(Name = "LinkImage")]
         public string LinkImage { get; set; }
 
-        [Required, Display(Name = "Title")]
+        [Required, Display(Name = "Description")]
         public string Description { get; set; }
 
         [Required, Display(Name = "WebLink")]

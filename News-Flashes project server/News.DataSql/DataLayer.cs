@@ -37,58 +37,74 @@ namespace News.Entities
 
             SaveChanges();
         }
-        public void AddSubject(string Name, string RssLink)
-        {
-            //create new default RssSubjectsUrl to db 
-            RssSubjectsUrl subjectsUrl = new RssSubjectsUrl { Link = $"https://rss.walla.co.il/feed/{RssLink}" };
-
-            //create new default Subject to db
-            Subject subject = new Subject { Name = Name };
-
-            subject.AddRssSubjectUrl(subjectsUrl);
-
-            //add the both of them to the db list
-            Subjects.Add(subject);
-            RssUrls.Add(subjectsUrl);
-        }
-
+        
         public void InitSubjects()
         {
             //https://rss.walla.co.il/feed/
             //http://www.ynet.co.il/Integration/StoryRss + .xml
             //https://www.maariv.co.il/Rss/
             //Walla 22 | Ynet 1854 | Maariv RssFeedsMivzakiChadashot
-            AddSubject("מבזקי חדשות", "22");
+            AddSubject("מבזקי חדשות", "22", "1854", "RssFeedsMivzakiChadashot");
             //walla 31?type=main | Ynet 550 | Maariv RssFeedsRechev
-            AddSubject("רכב", "31?type=main");
+            AddSubject("רכב", "31?type=main", "550", "RssFeedsRechev");
             //Walla 2500 | Ynet 598 | Maariv RssFeedsTayarot
-            AddSubject("תיירות", "2500");
+            AddSubject("תיירות", "2500", "598", "RssFeedsTayarot");
             //Walla 3?type=main | Ynet 3 | Maariv RssFeedsSport
-            AddSubject("ספורט", "3?type=main");
+            AddSubject("ספורט", "3?type=main","3", "RssFeedsSport");
             //Walla 2?type=main | Ynet 6 | Maariv RssFeedsKalkalaBaArez
-            AddSubject("כלכלה", "2?type=main");
+            AddSubject("כלכלה", "2?type=main","6", "RssFeedsKalkalaBaArez");
             //Walla 4?type=main  | Ynet 538 | Maariv RssFeedsTarbot
-            AddSubject("תרבות", "4?type=main");
+            AddSubject("תרבות", "4?type=main","538", "RssFeedsTarbot");
             //Walla 127 | Ynet 5363 | Maariv RssFeedsZarchanot
-            AddSubject("צרכנות", "127");
+            AddSubject("צרכנות", "127", "5363", "RssFeedsZarchanot");
             //Walla 4997 | Ynet 194 | Maariv RssFeedsOpinions
-            AddSubject("דעות", "4997");
+            AddSubject("דעות", "4997","194", "RssFeedsOpinions");
             //Walla 12864 | Ynet 4111 | Maariv
-            AddSubject("קריירה", "12864");
+            AddSubject("קריירה", "12864","4111","");
             //Walla 272 | Ynet | Maariv RssFeedsMozika
-            AddSubject("מוזיקה", "272");
+            AddSubject("מוזיקה", "272","", "RssFeedsMozika");
             //Walla 138?type=main | Ynet 4403 | Maariv jewishism
-            AddSubject("יהדות", "138?type=main");
+            AddSubject("יהדות", "138?type=main", "4403", "jewishism");
             //Walla 24?type=main | Ynet | Maariv RssFeedsOfna
-            AddSubject("אופנה/סטייל", "24?type=main");
+            AddSubject("אופנה/סטייל", "24?type=main","", "RssFeedsOfna");
             //Walla 139?type=main | Ynet 1208 | Maariv RssFeedsBriotVeYeoz
-            AddSubject("בריאות", "139?type=main");
+            AddSubject("בריאות", "139?type=main","1208", "RssFeedsBriotVeYeoz");
             //Walla 13111 | Ynet | Maariv RssFeedsNadlan
-            AddSubject("נדלן", "13111");
+            AddSubject("נדלן", "13111","", "RssFeedsNadlan");
             //Walla 9?type=main | Ynet 975 | Maariv RssFeedsOchel
-            AddSubject("אוכל", "9?type=main");         
+            AddSubject("אוכל", "9?type=main","975", "RssFeedsOchel");         
         }
+        public void AddSubject(string Name, string WallaUrl, string YnetUrl, string MaarivUrl)
+        {
+            string[] strings = { WallaUrl, YnetUrl, MaarivUrl };
+            RssSubjectsUrl subjectsUrl=null;
+            Subject subject = new Subject { Name = Name };
 
+            for (int i = 0; i < strings.Length; i++)
+            {
+                //check if there is link for the rss and orginize them by webs
+                //create the default subject url item and add him to the subject item
+                if (i == 0)
+                {
+                    subjectsUrl =new RssSubjectsUrl { Link = $"https://rss.walla.co.il/feed/{WallaUrl}" };
+                    subject.AddRssSubjectUrl(subjectsUrl);
+                }
+                else if (YnetUrl != "" && i == 1)
+                {
+                    subjectsUrl = new RssSubjectsUrl { Link = $"http://www.ynet.co.il/Integration/StoryRss{YnetUrl}.xml" };
+                    subject.AddRssSubjectUrl(subjectsUrl);
+                }
+                else if(MaarivUrl != "" && i == 2)
+                {
+                    subjectsUrl = new RssSubjectsUrl { Link = $"https://www.maariv.co.il/Rss/{MaarivUrl}" }; 
+                    subject.AddRssSubjectUrl(subjectsUrl);
+                }
+                RssUrls.Add(subjectsUrl);
+            }
+
+            //add the both of them to the db list
+            Subjects.Add(subject);
+        }
         //DBset lists of models to DB
         public DbSet<Article> Articles { get; set; }
         public DbSet<Subject> Subjects { get; set; }

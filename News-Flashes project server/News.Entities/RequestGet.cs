@@ -1,4 +1,5 @@
-﻿using System;
+﻿using News.DataSql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -11,12 +12,21 @@ namespace News.Entities
 {
     public class RequestGet
     {
-        public async Task XMLRequestGet()
+        public RequestGet() 
         {
+
+        }
+        public async Task XMLRequestGet(string urlLink)
+        {
+            int articleCounter = 0;
+
+            try
+            {
+            ArticleProvider article = new ArticleProvider(urlLink);
             using (var client = new HttpClient())
             {
                 // Make a GET request to the URL 
-                var response = await client.GetAsync("https://rss.walla.co.il/feed/22");
+                var response = await client.GetAsync(urlLink);
 
                 // Ensure the response was successful 
                 response.EnsureSuccessStatusCode();
@@ -29,18 +39,30 @@ namespace News.Entities
 
                 foreach (XmlNode node in xmlDoc.SelectNodes("//item"))
                 {
-                    //string title = node.SelectNodes("title")[0].InnerText;
-                    MainManager.Instance.Walla.Title = node["title"].InnerText;
-                    MainManager.Instance.Walla.WebLink = node["link"].InnerText;
+                        
+                     //string title = node.SelectNodes("title")[0].InnerText;
                     string description = node["description"].InnerText;
                     string[] separator = { "src=", "<br/>", "</p>", " /></a>" };
 					string[] strArr = description.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-					MainManager.Instance.Walla.Description = strArr[2];
-                    MainManager.Instance.Walla.LinkImage = strArr[1];
+                        if(strArr.Length > 2 && articleCounter <= 10)
+                        {
+                            AddArticle addArticle = new AddArticle();
+                            article.myArticle.Title = node["title"].InnerText;
+                            article.myArticle.WebLink = node["link"].InnerText;
+                            article.myArticle.Description = strArr[2];
+                            article.myArticle.LinkImage = strArr[1];
+                            article.myArticle.subject = DataLayer.Data.Subjects.ToList().Find(s => s.RssSubjects.ToList().Find(r => r.Link == urlLink) != null);
+                            articleCounter++;
+                            addArticle.AddArticleToDB(article.myArticle);
+                        }
                 }
 
-                // Output the content of the response 
-                Console.WriteLine(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                MainManager.Instance.logger.myLog.LogException("Local error Entities.RequestGet", ex);
+                return;
             }
         }
     }
