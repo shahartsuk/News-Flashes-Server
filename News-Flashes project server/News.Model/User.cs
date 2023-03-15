@@ -9,7 +9,7 @@ namespace News.Model
 {
     public class User
     {
-        public User() { Subjects = new List<UserSubjects>(); }
+        public User() { }
         [Key]
         public int Id { get; set; }
         [Display(Name = "Name")]
@@ -18,8 +18,7 @@ namespace News.Model
         [Required,Display(Name = "Email")] 
         public string Email { get; set; }
 
-        //private List<UserSubjects> _Subjects { set; }
-        public List<UserSubjects> Subjects { get; set; }
+       
         
 
     }

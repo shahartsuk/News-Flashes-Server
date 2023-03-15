@@ -1,4 +1,5 @@
 ﻿using News.DataSql;
+using News.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,46 +17,50 @@ namespace News.Entities
         {
 
         }
+
+        
         public async Task XMLRequestGet(string urlLink)
         {
             int articleCounter = 0;
 
             try
             {
-            ArticleProvider article = new ArticleProvider(urlLink);
-            using (var client = new HttpClient())
-            {
-                // Make a GET request to the URL 
-                var response = await client.GetAsync(urlLink);
-
-                // Ensure the response was successful 
-                response.EnsureSuccessStatusCode();
-
-                // Read the content of the response 
-                var content = await response.Content.ReadAsStringAsync();
-
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.LoadXml(content);
-
-                foreach (XmlNode node in xmlDoc.SelectNodes("//item"))
+           
+                List<Article> ArticlesList = new List<Article>();
+                AddArticles addArticles= new AddArticles();
+                using (var client = new HttpClient())
                 {
-                        
-                     //string title = node.SelectNodes("title")[0].InnerText;
-                    string description = node["description"].InnerText;
-                    string[] separator = { "src=", "<br/>", "</p>", " /></a>" };
-					string[] strArr = description.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                        if(strArr.Length > 2 && articleCounter <= 10)
+                    // Make a GET request to the URL 
+                    var response = await client.GetAsync(urlLink);
+
+                    // Ensure the response was successful 
+                    response.EnsureSuccessStatusCode();
+
+                    // Read the content of the response 
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(content);
+
+                        foreach (XmlNode node in xmlDoc.SelectNodes("//item"))
                         {
-                            AddArticle addArticle = new AddArticle();
-                            article.myArticle.Title = node["title"].InnerText;
-                            article.myArticle.WebLink = node["link"].InnerText;
-                            article.myArticle.Description = strArr[2];
-                            article.myArticle.LinkImage = strArr[1];
-                            article.myArticle.subject = DataLayer.Data.Subjects.ToList().Find(s => s.RssSubjects.ToList().Find(r => r.Link == urlLink) != null);
-                            articleCounter++;
-                            addArticle.AddArticleToDB(article.myArticle);
+
+                            
+                            if (articleCounter < 10)
+                            {
+                               ArticleProvider article = new ArticleProvider(urlLink);
+                               article.myArticle.Title = node["title"].InnerText;
+                                article.myArticle.WebLink = node["link"].InnerText;
+                                article.myArticle.LinkImage = article.myArticle.ExtractImageFromItem(node);
+                                article.myArticle.Description = article.myArticle.ExtractClearDescriptionFromItem(node);
+                                article.myArticle.subjectName = DataLayer.Data.Subjects.ToList().Find(s => s.RssSubjects.ToList().Find(r => r.Link == urlLink) != null).Name;
+                                articleCounter++;
+                                ArticlesList.Add(article.myArticle);
+                            }
                         }
-                }
+                    addArticles.AddArticleToDB(ArticlesList);
+
+                   
 
                 }
             }

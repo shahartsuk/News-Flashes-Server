@@ -17,12 +17,13 @@ namespace News.Entities
         public RequestGet requestGet { get; set; }
         public RequestPost requestPost { get; set; }
         public Logger logger { get; set; }
-
+        
         public void Init()
         {
             requestGet = new RequestGet();
             requestPost = new RequestPost();
             logger = new Logger("File");
+
         }
     }
 }

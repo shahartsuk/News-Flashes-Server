@@ -13,14 +13,22 @@ namespace News.Server.Controllers
         {
             Task GetXML;
             RequestGet request = new RequestGet();
-            List<RssSubjectsUrl> rssSubjectsUrls= DataLayer.Data.RssUrls.ToList();
+           
             GetXML = Task.Run(async () =>
             {
-                foreach (RssSubjectsUrl RssUrl in rssSubjectsUrls)
+                while (true)
                 {
-                    await request.XMLRequestGet(RssUrl.Link);
+                     List<RssSubjectsUrl> rssSubjectsUrls= DataLayer.Data.RssUrls.ToList();
+                    foreach (RssSubjectsUrl RssUrl in rssSubjectsUrls)
+                    {
+                        await request.XMLRequestGet(RssUrl.Link);
+                    }
+                    SaveChangesManager.InitSave();
                 }
+              
             });
+
+
             
         }
 
