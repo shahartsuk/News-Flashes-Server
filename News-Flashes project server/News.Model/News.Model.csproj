@@ -49,7 +49,6 @@
     <Compile Include="RssSubjectsUrl.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserSubjects.cs" />
     <Compile Include="WallaRSS.cs" />
     <Compile Include="YnetRSS.cs" />
   </ItemGroup>

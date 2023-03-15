@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using News.Dal;
-using News.Entities;
 
 namespace News.Utilities
 {

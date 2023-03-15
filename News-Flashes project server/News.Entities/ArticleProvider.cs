@@ -14,13 +14,13 @@ namespace News.Entities
 
         public ArticleProvider(string provider) 
         {
-            if (provider.Contains("https://rss.walla.co.il/feed/"))
+            if (provider.Contains("walla"))
             {
                 myArticle = new WallaRSS();
-            }else if(provider.Contains("http://www.ynet.co.il/Integration/StoryRss"))
+            }else if(provider.Contains("ynet"))
             {
                 myArticle = new YnetRSS();
-            }else if (provider.Contains("https://www.maariv.co.il/Rss/"))
+            }else if (provider.Contains("maariv"))
             {
                 myArticle= new MaarivRSS();
             }
