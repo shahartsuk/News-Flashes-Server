@@ -8,23 +8,19 @@ using System.Threading.Tasks;
 
 namespace News.DataSql
 {
-    public class AddArticle
+    public class AddArticles
     {
-        public void AddArticleToDB(Article article)
+        public void AddArticleToDB(List<Article> articles)
         {
-            try
+
+            foreach (Article article in articles)
             {
                 DataLayer.Data.Articles.Add(article);
-            }
-            catch (Exception ex)
-            {
+                Console.WriteLine(DataLayer.Data.Articles.Count());
+                Console.WriteLine(article.Title);
 
-                throw;
             }
-        }
-        public void SaveArticleList()
-        {
-            DataLayer.Data.SaveChanges();
+           
         }
     }
 }

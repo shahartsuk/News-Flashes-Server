@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using News.Model;
 using News.Dal;
+using System.Security.Cryptography.X509Certificates;
 
 namespace News.DataSql
 {
@@ -20,7 +21,7 @@ namespace News.DataSql
                 Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataLayer>());
                 //if the first default model list is null use seed and start the DB
                 if (Subjects.Count() == 0) Seed();
-                //Seed();
+              
             }
             catch (Exception)
             {
@@ -45,37 +46,37 @@ namespace News.DataSql
             //http://www.ynet.co.il/Integration/StoryRss + .xml
             //https://www.maariv.co.il/Rss/
             //Walla 22 | Ynet 1854 | Maariv RssFeedsMivzakiChadashot
-            AddSubject("מבזקי חדשות", "22", "1854", "RssFeedsMivzakiChadashot");
+            AddSubject_UrlSubject("מבזקי חדשות", "22", "1854", "RssFeedsMivzakiChadashot");
             //walla 31?type=main | Ynet 550 | Maariv RssFeedsRechev
-            AddSubject("רכב", "31?type=main", "550", "RssFeedsRechev");
+            AddSubject_UrlSubject("רכב", "31?type=main", "550", "RssFeedsRechev");
             //Walla 2500 | Ynet 598 | Maariv RssFeedsTayarot
-            AddSubject("תיירות", "2500", "598", "RssFeedsTayarot");
+            AddSubject_UrlSubject("תיירות", "2500", "598", "RssFeedsTayarot");
             //Walla 3?type=main | Ynet 3 | Maariv RssFeedsSport
-            AddSubject("ספורט", "3?type=main","3", "RssFeedsSport");
+            AddSubject_UrlSubject("ספורט", "3?type=main","3", "RssFeedsSport");
             //Walla 2?type=main | Ynet 6 | Maariv RssFeedsKalkalaBaArez
-            AddSubject("כלכלה", "2?type=main","6", "RssFeedsKalkalaBaArez");
+            AddSubject_UrlSubject("כלכלה", "2?type=main","6", "RssFeedsKalkalaBaArez");
             //Walla 4?type=main  | Ynet 538 | Maariv RssFeedsTarbot
-            AddSubject("תרבות", "4?type=main","538", "RssFeedsTarbot");
+            AddSubject_UrlSubject("תרבות", "4?type=main","538", "RssFeedsTarbot");
             //Walla 127 | Ynet 5363 | Maariv RssFeedsZarchanot
-            AddSubject("צרכנות", "127", "5363", "RssFeedsZarchanot");
+            AddSubject_UrlSubject("צרכנות", "127", "5363", "RssFeedsZarchanot");
             //Walla 4997 | Ynet 194 | Maariv RssFeedsOpinions
-            AddSubject("דעות", "4997","194", "RssFeedsOpinions");
+            AddSubject_UrlSubject("דעות", "4997","194", "RssFeedsOpinions");
             //Walla 12864 | Ynet 4111 | Maariv
-            AddSubject("קריירה", "12864","4111","");
+            AddSubject_UrlSubject("קריירה", "12864","4111","");
             //Walla 272 | Ynet | Maariv RssFeedsMozika
-            AddSubject("מוזיקה", "272","", "RssFeedsMozika");
+            AddSubject_UrlSubject("מוזיקה", "272","", "RssFeedsMozika");
             //Walla 138?type=main | Ynet 4403 | Maariv jewishism
-            AddSubject("יהדות", "138?type=main", "4403", "jewishism");
+            AddSubject_UrlSubject("יהדות", "138?type=main", "4403", "jewishism");
             //Walla 24?type=main | Ynet | Maariv RssFeedsOfna
-            AddSubject("אופנה/סטייל", "24?type=main","", "RssFeedsOfna");
+            AddSubject_UrlSubject("אופנה/סטייל", "24?type=main","", "RssFeedsOfna");
             //Walla 139?type=main | Ynet 1208 | Maariv RssFeedsBriotVeYeoz
-            AddSubject("בריאות", "139?type=main","1208", "RssFeedsBriotVeYeoz");
+            AddSubject_UrlSubject("בריאות", "139?type=main","1208", "RssFeedsBriotVeYeoz");
             //Walla 13111 | Ynet | Maariv RssFeedsNadlan
-            AddSubject("נדלן", "13111","", "RssFeedsNadlan");
+            AddSubject_UrlSubject("נדלן", "13111","", "RssFeedsNadlan");
             //Walla 9?type=main | Ynet 975 | Maariv RssFeedsOchel
-            AddSubject("אוכל", "9?type=main","975", "RssFeedsOchel");         
+            AddSubject_UrlSubject("אוכל", "9?type=main","975", "RssFeedsOchel");         
         }
-        public void AddSubject(string Name, string WallaUrl, string YnetUrl, string MaarivUrl)
+        public void AddSubject_UrlSubject(string Name, string WallaUrl, string YnetUrl, string MaarivUrl)
         {
             string[] strings = { WallaUrl, YnetUrl, MaarivUrl };
             RssSubjectsUrl subjectsUrl=null;
@@ -105,11 +106,16 @@ namespace News.DataSql
 
             //add the both of them to the db list
             Subjects.Add(subject);
+
         }
+
+       
+
         //DBset lists of models to DB
         public DbSet<Article> Articles { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RssSubjectsUrl> RssUrls { get; set; }
+        
     }
 }

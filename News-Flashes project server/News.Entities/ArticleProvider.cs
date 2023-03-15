@@ -10,19 +10,20 @@ namespace News.Entities
 {
     public class ArticleProvider
     {
-        public Article myArticle { get; set; }
+        public Article myArticle =new Article();
 
         public ArticleProvider(string provider) 
         {
             if (provider.Contains("walla"))
             {
-                myArticle = new WallaRSS();
-            }else if(provider.Contains("ynet"))
+                myArticle.Source = "Walla";
+            } else if (provider.Contains("http://www.ynet.co.il/Integration/StoryRss"))
             {
-                myArticle = new YnetRSS();
-            }else if (provider.Contains("maariv"))
+                myArticle.Source = "Ynet";
+            } else if (provider.Contains("https://www.maariv.co.il/Rss/"))
             {
-                myArticle= new MaarivRSS();
+                myArticle.Source = "Maariv";
+
             }
         }
     }

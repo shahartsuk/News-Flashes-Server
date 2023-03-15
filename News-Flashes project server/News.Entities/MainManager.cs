@@ -20,7 +20,7 @@ namespace News.Entities
         public RequestGet requestGet { get; set; }
         public RequestPost requestPost { get; set; }
         public Logger logger { get; set; }
-
+        
         public void Init()
         {
             subjectManager= new SubjectManager();
@@ -28,6 +28,7 @@ namespace News.Entities
             requestGet = new RequestGet();
             requestPost = new RequestPost();
             logger = new Logger("File");
+
         }
     }
 }

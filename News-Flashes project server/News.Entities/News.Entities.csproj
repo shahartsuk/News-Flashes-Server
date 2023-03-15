@@ -143,6 +143,7 @@
     <Compile Include="RssUrlManager.cs" />
     <Compile Include="SubjectManager.cs" />
     <Compile Include="UserManager.cs" />
+    <Compile Include="SaveChangesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
