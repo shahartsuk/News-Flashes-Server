@@ -5,8 +5,9 @@ using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using News.Model;
+using News.Dal;
 
-namespace News.Entities
+namespace News.DataSql
 {
     public class DataLayer : DbContext
     {
@@ -110,6 +111,5 @@ namespace News.Entities
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RssSubjectsUrl> RssUrls { get; set; }
-        public DbSet<UserSubjects> UserSubjects { get; set; }
     }
 }

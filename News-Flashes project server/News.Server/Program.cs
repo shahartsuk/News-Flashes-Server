@@ -9,13 +9,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
 
 var corsBuilder = new CorsPolicyBuilder();
 corsBuilder.AllowAnyHeader();
 corsBuilder.AllowAnyMethod();
 corsBuilder.AllowAnyOrigin();
 //corsBuilder.AllowCredentials();
-builder.Services.AddCors(options => { options.AddPolicy("AllowAll", corsBuilder.Build()); });
+builder.Services.AddCors(options => {
+    var frontendurl = configuration.GetValue<string>("frontend_url");
+    //options.AddPolicy("AllowAll", corsBuilder.Build());
+
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(frontendurl).AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 
 
@@ -29,6 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 //what we add
 app.UseHttpsRedirection();
 app.UseRouting();

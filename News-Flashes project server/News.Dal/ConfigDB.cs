@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 
-namespace News.Entities
+namespace News.Dal
 {
     public class ConfigDB
     {
@@ -15,7 +15,7 @@ namespace News.Entities
             try
             {
                 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
-
+                
                 string connectionString = config.GetConnectionString("MyDB");
 
                 return connectionString;

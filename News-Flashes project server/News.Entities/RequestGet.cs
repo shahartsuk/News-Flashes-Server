@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace News.Entities
 {
-    public class RequestGet
+    public class RequestGet: BaseEntity
     {
         public RequestGet() 
         {
@@ -22,7 +22,8 @@ namespace News.Entities
 
             try
             {
-            ArticleProvider article = new ArticleProvider(urlLink);
+                AddArticle addArticle = new AddArticle();
+                
             using (var client = new HttpClient())
             {
                 // Make a GET request to the URL 
@@ -46,17 +47,19 @@ namespace News.Entities
 					string[] strArr = description.Split(separator, StringSplitOptions.RemoveEmptyEntries);
                         if(strArr.Length > 2 && articleCounter <= 10)
                         {
-                            AddArticle addArticle = new AddArticle();
+                            ArticleProvider article = new ArticleProvider(urlLink);
                             article.myArticle.Title = node["title"].InnerText;
                             article.myArticle.WebLink = node["link"].InnerText;
                             article.myArticle.Description = strArr[2];
                             article.myArticle.LinkImage = strArr[1];
+
                             article.myArticle.subject = DataLayer.Data.Subjects.ToList().Find(s => s.RssSubjects.ToList().Find(r => r.Link == urlLink) != null);
+
                             articleCounter++;
                             addArticle.AddArticleToDB(article.myArticle);
                         }
                 }
-
+                    addArticle.SaveArticleList();
                 }
             }
             catch (Exception ex)

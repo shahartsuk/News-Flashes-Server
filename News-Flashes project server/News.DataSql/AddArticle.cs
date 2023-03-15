@@ -1,5 +1,4 @@
-﻿using News.Entities;
-using News.Model;
+﻿using News.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,7 +12,18 @@ namespace News.DataSql
     {
         public void AddArticleToDB(Article article)
         {
-            DataLayer.Data.Articles.Add(article);
+            try
+            {
+                DataLayer.Data.Articles.Add(article);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public void SaveArticleList()
+        {
             DataLayer.Data.SaveChanges();
         }
     }
