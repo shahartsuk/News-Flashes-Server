@@ -10,23 +10,43 @@ namespace News.Server.Controllers
     public class GetArticles
     {
         [HttpGet("GetArticlesFromRSS")]
-        public void GetAllSubjectsList()
+        public  void GetAllArticlesList()
         {
-            RequestGet request = new RequestGet();
-           
-            GetXML = Task.Run(async () =>
+
+            try
             {
-                while (true)
-                {
-                     List<RssSubjectsUrl> rssSubjectsUrls= DataLayer.Data.RssUrls.ToList();
-                    foreach (RssSubjectsUrl RssUrl in rssSubjectsUrls)
+                // Task Getxml;
+                //RequestGet requestGet = new RequestGet();
+
+               
+                  Task.Run(async () =>
+                  {
+                    while (true)
                     {
-                        await request.XMLRequestGet(RssUrl.Link);
-                    }
-                    SaveChangesManager.InitSave();
-                }
-              
-            });
+                        List<RssSubjectsUrl> rssSubjectsUrls = DataLayer.Data.RssUrls.ToList();
+                        foreach (RssSubjectsUrl RssUrl in rssSubjectsUrls)
+                        {
+                            await MainManager.Instance.requestGet.XMLRequestGet(RssUrl.Link);
+                        }
+                        MainManager.InitSave();
+
+
+                         Thread.Sleep(1000*60*60);
+
+                        MainManager.InitClear();
+
+                     
+                      }
+
+                });
+               
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine(ex.Message);
+            }
+
 
 
             

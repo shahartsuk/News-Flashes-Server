@@ -13,11 +13,7 @@ namespace News.Entities
 {
     public class RequestGet: BaseEntity
     {
-        public RequestGet() 
-        {
-
-        }
-
+         
         
         public async Task XMLRequestGet(string urlLink)
         {

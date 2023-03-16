@@ -3,6 +3,7 @@ using News.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,5 +24,16 @@ namespace News.Entities
             }
             return null;
         }
+
+        public static void InitSave()
+        {
+            SaveLocalChanges.SaveInData(); 
+        }
+
+        public static void InitClear()
+        {
+            SaveLocalChanges.ClearData();
+        }
+
     }
 }
