@@ -16,11 +16,13 @@ namespace News.Entities
             switch (provider)
             {
                 case "subject":
-                return DataLayer.Data.Subjects.ToList();
+                return DataLayer.Data.SubjectsAllIncludes();
                 case "article":
                     return DataLayer.Data.Articles.ToList();
                 case "rssurl":
                     return DataLayer.Data.RssUrls.ToList();
+                case "user":
+                    return DataLayer.Data.UsersAllIncludes();
             }
             return null;
         }

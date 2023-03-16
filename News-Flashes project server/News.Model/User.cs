@@ -9,7 +9,7 @@ namespace News.Model
 {
     public class User
     {
-        public User() { /*Subjects = new List<Subject>();*/ }
+        public User() { Subjects = new List<UserSubject>(); }
         [Key]
         public int Id { get; set; }
         [Display(Name = "Name")]
@@ -18,9 +18,16 @@ namespace News.Model
         [Required,Display(Name = "Email")] 
         public string Email { get; set; }
 
-        //private List<UserSubjects> _Subjects { set; }
-        //public List<Subject> Subjects { get; set; }
+        public List<UserSubject> Subjects { get; set; }
         
-        //public void AddSubject(Subject subject) { Subjects.Add(subject); }
+        public void AddSubject(Subject subject) 
+        {
+            UserSubject subjectUser = new UserSubject{ subject = subject,user=this };
+            foreach (UserSubject userSubject in Subjects)
+            {
+                this.Subjects.Remove(userSubject);
+            }
+            Subjects.Add(subjectUser); 
+        }
     }
 }
