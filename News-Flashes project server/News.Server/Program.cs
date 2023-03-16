@@ -19,7 +19,7 @@ corsBuilder.AllowAnyOrigin();
 //corsBuilder.AllowCredentials();
 builder.Services.AddCors(options => {
     var frontendurl = configuration.GetValue<string>("frontend_url");
-    //options.AddPolicy("AllowAll", corsBuilder.Build());
+    options.AddPolicy("AllowAll", corsBuilder.Build());
 
     options.AddDefaultPolicy(builder =>
     {

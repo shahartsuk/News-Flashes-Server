@@ -9,9 +9,25 @@ namespace News.DataSql
 {
     public class ArticleDB
     {
-        public static List<Subject> GetSubjectsDB()
+        public List<Article> GetArticleForEachUser(string email)
         {
-            return DataLayer.Data.Subjects.ToList();
+            List<Article> articlesUserList = new List<Article>();
+            User user = DataLayer.Data.UsersAllIncludes().Find(u => u.Email == email);
+            
+            if(user != null)
+            {
+                foreach (UserSubject userSubject in user.Subjects)
+                {
+                    List<Article> articlesDB = DataLayer.Data.Articles.ToList().FindAll(a=>a.subjectName == userSubject.subject.Name );
+                    foreach (Article article in articlesDB) 
+                    {
+                        articlesUserList.Add(article);
+                    }
+                }
+                 
+            }
+            return articlesUserList;
         }
+
     }
 }

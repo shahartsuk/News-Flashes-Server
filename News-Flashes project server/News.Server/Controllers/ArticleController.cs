@@ -14,7 +14,7 @@ namespace News.Server.Controllers
         {
             RequestGet request = new RequestGet();
            
-            GetXML = Task.Run(async () =>
+            Task.Run(async () =>
             {
                 while (true)
                 {
@@ -23,7 +23,7 @@ namespace News.Server.Controllers
                     {
                         await request.XMLRequestGet(RssUrl.Link);
                     }
-                    SaveChangesManager.InitSave();
+                    MainManager.Instance.InitSave();
                 }
               
             });

@@ -56,6 +56,7 @@
     <Compile Include="RssUrlDB.cs" />
     <Compile Include="DataLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveLocalChanges.cs" />
     <Compile Include="SubjectDB.cs" />
     <Compile Include="UserDB.cs" />
   </ItemGroup>

@@ -13,10 +13,11 @@ namespace News.Server.Controllers
         {
             MainManager.Instance.userManager.SendUserDetails(user);
         }
-        [HttpPost("userSubjects/{email?}")]
-        public void GetUserSubjects(string email, string[] subjects)
+        [HttpPost("userSubjects/{email}/{subjects}")]
+        public void GetUserSubjects(string email, string subjects)
         {
-            MainManager.Instance.userManager.AddUserSubject(email, subjects);
+            string[] userSubjects = subjects.Split(',');
+            MainManager.Instance.userManager.AddUserSubject(email, userSubjects);
         }
     }
 }

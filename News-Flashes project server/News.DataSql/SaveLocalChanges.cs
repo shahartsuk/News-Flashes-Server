@@ -1,5 +1,4 @@
-﻿using News.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +14,7 @@ namespace News.DataSql
             {
                 DataLayer.Data.SaveChanges();
             }
-           catch (Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
