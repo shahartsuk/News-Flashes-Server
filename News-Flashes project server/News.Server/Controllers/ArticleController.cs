@@ -50,16 +50,9 @@ namespace News.Server.Controllers
             
         }
         [HttpPost("getArticlesForUser")]
-        public void SetUserSubjects(string userEmail)
+        public JsonResult SetUserSubjects(string userEmail)
         {
-            List<UserSubject> userSubjectsList = MainManager.Instance.GetDataFromDB("");
-           List<Article> articlesList=(List<Article>)MainManager.Instance.articleManager.GetDataFromDB("article");
-
-            foreach (Article article in articlesList) 
-            {
-
-            }
-            
+         return new JsonResult( MainManager.Instance.userManager.GetArticlesForEachUserEntity(userEmail));
         }
 
     }

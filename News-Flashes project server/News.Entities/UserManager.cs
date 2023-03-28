@@ -19,5 +19,13 @@ namespace News.Entities
         {
             userDB.AddUserSubjectsToDB(email, subjects);
         }
+
+
+
+        public List<Article> GetArticlesForEachUserEntity(string UserEmail)
+        {
+          
+          return userDB.GetArticlesForeachUserDataSQL(UserEmail);
+        }
     }
 }

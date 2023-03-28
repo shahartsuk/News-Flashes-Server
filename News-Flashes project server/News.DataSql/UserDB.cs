@@ -75,5 +75,41 @@ namespace News.DataSql
             }
         }
             
+
+
+
+        public List<Article> GetArticlesForeachUserDataSQL(string userEmail)
+        {
+            List<UserSubject> DBuserSubjectsList = DataLayer.Data.UserSubjectAllIncludes().FindAll(u=>u.user.Email==userEmail);
+
+            List<Article> DBarticlesList = DataLayer.Data.Articles.ToList();
+
+            List<Article> UserArticlesList = new List<Article>();
+
+            List<Article> ArticlesForEachSubList ;
+
+
+
+            if (DBuserSubjectsList.Count > 0)
+            {
+              
+                    foreach (UserSubject userSubject in DBuserSubjectsList)
+                    {
+                    ArticlesForEachSubList= DBarticlesList.FindAll(a => a.subjectName == userSubject.subject.Name);
+
+                        foreach (Article article in ArticlesForEachSubList)
+                        {
+                            UserArticlesList.Add(article);
+                        }
+                    }
+                
+            }
+
+
+
+            return UserArticlesList.OrderBy(u => u.Source).OrderBy(u=>u.subjectName).ToList(); 
+
+        }
+
     }
 }
