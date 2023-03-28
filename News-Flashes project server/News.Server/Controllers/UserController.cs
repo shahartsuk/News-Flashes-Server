@@ -20,7 +20,7 @@ namespace News.Server.Controllers
             MainManager.Instance.userManager.AddUserSubject(email, userSubjects);
         }
 
-        [HttpGet("getArticlesForUser")]
+        [HttpGet("getArticlesForUser/{email}")]
         public JsonResult GetArticlesForEachUser(string email)
         {
             return new JsonResult(MainManager.Instance.articleManager.GetArticleForEachUserEntities(email));
