@@ -12,15 +12,16 @@ namespace News.DataSql
         private readonly object obj = new object();
         public void CreateNewUser(User user)
         {
-            if (!DataLayer.Data.Users.ToList().Exists(u => u.Email == user.Email))
+            if (DataLayer.Data.Users.ToList().Exists(u => u.Email == user.Email) == false)
             {
                 try
                 {
                     lock (obj)
                     {
-                        if (!DataLayer.Data.Users.ToList().Exists(u => u.Email == user.Email))
+                        if (DataLayer.Data.Users.ToList().Exists(u => u.Email == user.Email) == false)
                         {
                             DataLayer.Data.Users.Add(user);
+
                             DataLayer.Data.SaveChanges();
                         }
                     }
@@ -32,23 +33,47 @@ namespace News.DataSql
         }
         public void AddUserSubjectsToDB(string email, string[] subjects)
         {
-            int subjectCounter = 0;
-            User user = DataLayer.Data.UsersAllIncludes().Find(u => u.Email == email);
-            if (user != null)
+           int subjectCounter = 0;
+            UserSubject userSubject;
+            try
             {
-                foreach (Subject subject in DataLayer.Data.SubjectsAllIncludes()) 
+                User user = DataLayer.Data.Users.ToList().Find(u => u.Email == email);
+
+                if (user != null)
                 {
-                    if(subject.Id == int.Parse(subjects[subjectCounter]))
+                    List<UserSubject> userSubjectsDB = DataLayer.Data.UserSubjectAllIncludes().FindAll(u => u.user.Email == email);
+
+                    if (userSubjectsDB.Count() > 0)
                     {
-                        user.AddSubject(subject);
-                        if(subjectCounter < subjects.Length-1) 
+                        foreach (UserSubject userSubjectDB in userSubjectsDB)
                         {
-                            subjectCounter++;
+                            DataLayer.Data.UserSubjects.Remove(userSubjectDB);
                         }
                     }
+
+                    foreach (Subject subject in DataLayer.Data.SubjectsAllIncludes())
+                    {
+                        if (subject.Id == int.Parse(subjects[subjectCounter]))
+                        {
+                            userSubject = new UserSubject { subject= subject, user = user};
+
+                            DataLayer.Data.UserSubjects.Add(userSubject);
+
+                            if(subjectCounter < subjects.Length-1)
+                            {
+                                subjectCounter++;
+                            }
+                        }
+                    }
+                    DataLayer.Data.SaveChanges();
                 }
             }
-            DataLayer.Data.SaveChanges();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+            
     }
 }

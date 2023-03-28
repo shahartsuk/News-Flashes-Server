@@ -12,7 +12,9 @@ namespace News.Model
         public UserSubject() { }
         [Key] 
         public int Id { get; set; }
+        [Display(Name = "UserID")]
         public User user { get; set; }
+        [Display(Name = "SubjectID")]
         public Subject subject { get; set; }
     }
 }

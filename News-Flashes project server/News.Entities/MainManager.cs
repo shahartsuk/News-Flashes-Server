@@ -16,6 +16,7 @@ namespace News.Entities
         public static MainManager Instance { get { return _Instance; } }
 
         public UserManager userManager;
+
         public SubjectManager subjectManager;
 
         public ArticleManager articleManager;
