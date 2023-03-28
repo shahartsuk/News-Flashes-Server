@@ -22,7 +22,9 @@ namespace News.Entities
                 case "rssurl":
                     return DataLayer.Data.RssUrls.ToList();
                 case "user":
-                    return DataLayer.Data.UsersAllIncludes();
+                    return DataLayer.Data.Users.ToList();
+                case "userSubjects":
+                    return DataLayer.Data.SubjectsAllIncludes();
             }
             return null;
         }

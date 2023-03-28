@@ -10,7 +10,11 @@ namespace News.Entities
 {
     public class ArticleManager: BaseEntity
     {
- 
+        public ArticleDB articleDB = new ArticleDB();
+        public List<Article> GetArticleForEachUserEntities(string email)
+        {
+            return articleDB.GetArticleForEachUserDataSQL(email);
+        }
 
         
     }

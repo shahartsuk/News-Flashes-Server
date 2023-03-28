@@ -114,10 +114,11 @@ namespace News.DataSql
             List<Subject> subjects = Subjects.Include(s=>s.RssSubjects).ToList();
             return subjects;
         }
-        public List<User> UsersAllIncludes()
+
+        public List<UserSubject> UserSubjectAllIncludes()
         {
-            List<User> users = Users.Include(s => s.Subjects).ToList();
-            return users;
+            List<UserSubject> userSubjects = UserSubjects.Include(u=>u.user).Include(u=>u.subject).ToList();
+            return userSubjects;
         }
 
         //DBset lists of models to DB
@@ -125,6 +126,6 @@ namespace News.DataSql
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RssSubjectsUrl> RssUrls { get; set; }
-        
+        public DbSet<UserSubject> UserSubjects { get; set; } 
     }
 }

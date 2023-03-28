@@ -19,5 +19,11 @@ namespace News.Server.Controllers
             string[] userSubjects = subjects.Split(',');
             MainManager.Instance.userManager.AddUserSubject(email, userSubjects);
         }
+
+        [HttpGet("getArticlesForUser")]
+        public JsonResult GetArticlesForEachUser(string email)
+        {
+            return new JsonResult(MainManager.Instance.articleManager.GetArticleForEachUserEntities(email));
+        }
     }
 }
