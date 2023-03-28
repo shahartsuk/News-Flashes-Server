@@ -15,9 +15,7 @@ namespace News.Server.Controllers
 
             try
             {
-                // Task Getxml;
-                //RequestGet requestGet = new RequestGet();
-
+                
                
                   Task.Run(async () =>
                   {
@@ -51,9 +49,16 @@ namespace News.Server.Controllers
 
             
         }
-        [HttpPost("GetArticlesFromDB")]
-        public void SetUserSubjects(string[] userSubjects)
+        [HttpPost("getArticlesForUser")]
+        public void SetUserSubjects(string userEmail)
         {
+            List<UserSubject> userSubjectsList = MainManager.Instance.GetDataFromDB("");
+           List<Article> articlesList=(List<Article>)MainManager.Instance.articleManager.GetDataFromDB("article");
+
+            foreach (Article article in articlesList) 
+            {
+
+            }
             
         }
 

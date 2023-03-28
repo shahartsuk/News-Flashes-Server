@@ -17,6 +17,8 @@ namespace News.Entities
 
         public UserManager userManager;
         public SubjectManager subjectManager;
+
+        public ArticleManager articleManager;
         public RequestGet requestGet { get; set; }
         public RequestPost requestPost { get; set; }
         public Logger logger { get; set; }
@@ -25,6 +27,7 @@ namespace News.Entities
         {
             subjectManager= new SubjectManager();
             userManager = new UserManager();
+            articleManager= new ArticleManager();
             requestGet = new RequestGet();
             requestPost = new RequestPost();
             logger = new Logger("File");

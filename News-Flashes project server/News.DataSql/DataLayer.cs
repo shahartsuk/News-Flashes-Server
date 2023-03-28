@@ -20,7 +20,8 @@ namespace News.DataSql
             {
                 Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DataLayer>());
                 //if the first default model list is null use seed and start the DB
-                if (Subjects.Count() == 0) Seed();
+                if (Subjects.Count() == 0)
+                { Seed(); }
               
             }
             catch (Exception)
@@ -34,8 +35,10 @@ namespace News.DataSql
         //first entrace to DB
         private void Seed()
         {
+
             //default subjects
             InitSubjects();
+           
 
             SaveChanges();
         }
