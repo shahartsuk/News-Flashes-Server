@@ -24,7 +24,7 @@ namespace News.Entities
                 case "user":
                     return DataLayer.Data.Users.ToList();
                 case "userSubjects":
-                    return DataLayer.Data.SubjectsAllIncludes();
+                    return DataLayer.Data.UserSubjectAllIncludes();
             }
             return null;
         }
